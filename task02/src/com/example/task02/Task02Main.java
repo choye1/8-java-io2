@@ -1,8 +1,12 @@
 package com.example.task02;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Task02Main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -16,8 +20,17 @@ public class Task02Main {
     }
 
     public static List<Path> listFiles(Path rootDir) throws IOException, InterruptedException {
-        // your implementation here
 
-        return null;
+        List<Path> result = new ArrayList<>();
+        Stream<Path> stream = Files.walk(rootDir);
+        stream.forEach( path -> {
+            if (Files.isRegularFile(path)){
+                result.add(path);
+            }
+        });
+
+        return result;
+
+
     }
 }
